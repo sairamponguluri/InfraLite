@@ -9,24 +9,23 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout Code
-      uses: actions/checkout@v3
+      - name: Checkout Code
+        uses: actions/checkout@v3
 
-    - name: Setup Terraform
-      uses: hashicorp/setup-terraform@v2
-      with:
-        terraform_version: 1.5.0
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.5.0
 
-    - name: Terraform Init
-      run: terraform init
-      working-directory: terraform
+      - name: Terraform Init
+        run: terraform init
+        working-directory: terraform
 
-    - name: Terraform Apply
-      run: |
-        terraform apply \
-          -var="aws_access_key=${{ secrets.AWS_ACCESS_KEY_ID }}" \
-          -var="aws_secret_key=${{ secrets.AWS_SECRET_ACCESS_KEY }}" \
-          -var="region=us-east-1" \
-          -auto-approve
-      working-directory: terraform
-
+      - name: Terraform Apply
+        run: |
+          terraform apply \
+            -var="aws_access_key=${{ secrets.AWS_ACCESS_KEY_ID }}" \
+            -var="aws_secret_key=${{ secrets.AWS_SECRET_ACCESS_KEY }}" \
+            -var="region=us-east-1" \
+            -auto-approve
+        working-directory: terraform
